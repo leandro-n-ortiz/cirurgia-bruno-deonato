@@ -1,6 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
-import { SectionBox, CopyButton } from "@common";
+import { SectionBox, CopyButton, NextImageBox } from "@common";
+
+import qrCode from "@public/qrcode-pix.png";
 
 interface DonationSectionProps {
   title?: string;
@@ -22,22 +24,28 @@ export function DonationSection({
           flexDirection: "column",
           alignItems: "center",
           rowGap: 2,
+          textAlign: "center",
         }}
       >
-        <Box sx={{ textAlign: "center" }}>
-          <Typography>As doações podem ser feitas por PIX.</Typography>
-          <Typography>Toda ajuda é muito bem-vinda. Obrigado!</Typography>
+        <Typography>As contribuições podem ser feitas por PIX.</Typography>
+
+        <Box>
+          <Typography>Chave PIX (Aleatória):</Typography>
+          <Typography variant="body2">{PIX_KEY}</Typography>
+          <CopyButton
+            label="Copiar"
+            textToCopy={PIX_KEY}
+            fullWidth
+            variant="contained"
+            sx={{ mt: 1 }}
+          />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            columnGap: 1,
-          }}
-        >
-          <Typography>Chave PIX: {PIX_KEY}</Typography>
-          <CopyButton textToCopy={PIX_KEY} />
-        </Box>
+
+        <NextImageBox
+          src={qrCode}
+          alt="QrCode do PIX"
+          sx={{ width: "150px" }}
+        />
       </Box>
     </SectionBox>
   );

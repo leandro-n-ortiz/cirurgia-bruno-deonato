@@ -3,6 +3,8 @@
 import { useState } from "react";
 
 import {
+  Button,
+  ButtonProps,
   Fade,
   IconButton,
   IconButtonProps,
@@ -12,17 +14,41 @@ import {
 } from "@mui/material";
 import { ContentCopy as ContentCopyIcon } from "@mui/icons-material";
 
-type CopyButtonProps = Omit<IconButtonProps, "onClick"> & {
+type CopyButtonBaseProps = {
   /** The text to be copied to the clipboard when the button is clicked */
   textToCopy: string;
   /** How long the "Copied!" popover stays visible, in milliseconds */
   popoverDurationMs?: number;
 };
 
-/** IconButton that copies `textToCopy` to the clipboard and shows a "Copied!" popover for a few seconds. */
+type CopyButtonWithLabelProps = CopyButtonBaseProps &
+  Omit<ButtonProps, "onClick" | "endIcon" | "children"> & {
+    /** Text displayed in the button, before the copy icon */
+    label: string;
+  };
+
+type CopyIconButtonProps = CopyButtonBaseProps &
+  Omit<IconButtonProps, "onClick" | "children"> & {
+    label?: undefined;
+  };
+
+type CopyButtonProps = CopyButtonWithLabelProps | CopyIconButtonProps;
+
+// The union can't be narrowed after destructuring, so the rest props are cast per branch
+type ButtonRestProps = Omit<
+  CopyButtonWithLabelProps,
+  keyof CopyButtonBaseProps | "label"
+>;
+type IconButtonRestProps = Omit<
+  CopyIconButtonProps,
+  keyof CopyButtonBaseProps | "label"
+>;
+
+/** Button (label + trailing copy icon) that copies `textToCopy` to the clipboard and shows a "Copied!" popover for a few seconds. */
 export function CopyButton({
   textToCopy,
   popoverDurationMs = 2000,
+  label,
   ...rest
 }: CopyButtonProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -59,9 +85,23 @@ export function CopyButton({
 
   return (
     <>
-      <IconButton onClick={handleClick} aria-label="Copiar" {...rest}>
-        <ContentCopyIcon />
-      </IconButton>
+      {label ? (
+        <Button
+          onClick={handleClick}
+          endIcon={<ContentCopyIcon />}
+          {...(rest as ButtonRestProps)}
+        >
+          {label}
+        </Button>
+      ) : (
+        <IconButton
+          onClick={handleClick}
+          aria-label="Copiar"
+          {...(rest as IconButtonRestProps)}
+        >
+          <ContentCopyIcon />
+        </IconButton>
+      )}
       {/* Popper (not Popover) so it doesn't trap focus or aria-hide the background */}
       <Popper
         open={!!anchorEl}

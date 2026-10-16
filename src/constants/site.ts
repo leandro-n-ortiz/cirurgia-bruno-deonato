@@ -12,8 +12,9 @@ export const SITE_KEYWORDS = [
   "Cirurgia Bruno Deonato",
   "Ajuda cirurgia",
   "Doação PIX",
+  "Contribuição PIX",
 ] as const;
 
 export const SITE_LOCALE = "pt_BR";
 
-export const SITE_PRIMARY_COLOR = "#09346e";
+export const SITE_PRIMARY_COLOR = "#287B76";

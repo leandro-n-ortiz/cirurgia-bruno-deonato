@@ -27,7 +27,9 @@ export function DonationSection({
           textAlign: "center",
         }}
       >
-        <Typography>As contribuições podem ser feitas por PIX.</Typography>
+        <Typography>
+          As contribuições podem ser feitas diretamente por PIX.
+        </Typography>
 
         <Box>
           <Typography>Chave PIX (Aleatória):</Typography>

@@ -9,9 +9,6 @@ const theme = createTheme({
     primary: {
       main: SITE_PRIMARY_COLOR,
     },
-    secondary: {
-      main: "#d5b031",
-    },
   },
   typography: {
     fontFamily: "var(--font-roboto)",

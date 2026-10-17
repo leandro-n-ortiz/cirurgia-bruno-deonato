@@ -1,6 +1,9 @@
 import { Box, Typography } from "@mui/material";
 
-import { SectionBox } from "@common";
+import { SectionBox, NextImageBox, ExternalLink } from "@common";
+
+import instagramLogo from "@public/Instagram_Glyph_Gradient.png";
+import thanksImage from "@public/agradecimento.jpeg";
 
 interface DetailsSectionProps {
   title?: string;
@@ -16,9 +19,6 @@ export function DetailsSection({
       backgroundColor="primary.main"
       textColor="primary.contrastText"
     >
-      {/* <Typography variant="body1" component="p" sx={{ textAlign: "center" }}>
-        Detalhes...
-      </Typography> */}
       <Box
         sx={{
           display: "flex",
@@ -170,8 +170,44 @@ export function DetailsSection({
 
         <Box>
           <Typography>Bruno Deonato</Typography>
-          <Typography>@brunodeonato</Typography>
+          <ExternalLink
+            underline="none"
+            href="https://www.instagram.com/brunodeonato/"
+            sx={{
+              display: "inline-block",
+              width: "fit-content",
+              marginTop: 1,
+              color: "primary.contrastText",
+            }}
+          >
+            <Box
+              sx={{
+                width: "fit-content",
+                display: "flex",
+                columnGap: 0.5,
+                alignItems: "center",
+              }}
+            >
+              <NextImageBox
+                src={instagramLogo}
+                alt="Logo do Instagram"
+                sx={{
+                  width: "16px",
+                  marginTop: "4px", // fine-tunning the vertical alignment
+                }}
+              />
+              <Typography sx={{ fontWeight: "bold", width: "fit-content" }}>
+                @brunodeonato
+              </Typography>
+            </Box>
+          </ExternalLink>
         </Box>
+
+        <NextImageBox
+          src={thanksImage}
+          alt="Mensagem de agradecimento"
+          sx={{ width: "100%" }}
+        />
       </Box>
     </SectionBox>
   );

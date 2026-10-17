@@ -174,15 +174,12 @@ export function DetailsSection({
             underline="none"
             href="https://www.instagram.com/brunodeonato/"
             sx={{
-              display: "inline-block",
-              width: "fit-content",
               marginTop: 1,
               color: "primary.contrastText",
             }}
           >
             <Box
               sx={{
-                width: "fit-content",
                 display: "flex",
                 columnGap: 0.5,
                 alignItems: "center",
@@ -196,9 +193,7 @@ export function DetailsSection({
                   marginTop: "4px", // fine-tunning the vertical alignment
                 }}
               />
-              <Typography sx={{ fontWeight: "bold", width: "fit-content" }}>
-                @brunodeonato
-              </Typography>
+              <Typography fontWeight="bold">@brunodeonato</Typography>
             </Box>
           </ExternalLink>
         </Box>
